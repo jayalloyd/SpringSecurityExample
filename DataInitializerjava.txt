@@ -1,0 +1,23 @@
+package com.meenus.SpringSecurityDemo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import jakarta.annotation.PostConstruct;
+
+@Configuration
+public class DataInitializer {
+
+    @Autowired
+    private UserRepo userRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostConstruct
+    public void init() {
+        userRepo.save(new User(1, "meenu", passwordEncoder.encode("m@123")));
+        userRepo.save(new User(2, "rooney", passwordEncoder.encode("4321")));
+    }
+}
